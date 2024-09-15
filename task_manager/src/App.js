@@ -1,5 +1,5 @@
   import HomePage from './Pages/HomePage';
-  import { BrowserRouter, Routes, Route , Navigate } from "react-router-dom";
+  import { BrowserRouter, Routes, Route , Navigate, useNavigate } from "react-router-dom";
   import SignUpForm from './Pages/Signup';
   import LoginForm from './Pages/Login';
   import {  useDispatch, useSelector } from 'react-redux';
@@ -10,9 +10,14 @@
 
   
 
-  function App() {
+function App() {
+    
 
-    const { tasks, loading, loggedIn , error } = useSelector(state => state.tasks)
+  const navigate = useNavigate()
+
+    const { tasks, loading,  error } = useSelector(state => state.tasks)
+     const { loggedIn } = useSelector(state => state.user)
+    
     console.log(tasks)
 
     const dispatch = useDispatch();
@@ -31,11 +36,10 @@
     }, [tasks, token, dispatch])
     
     useEffect(() => {
-      if (loggedIn && !error) {
-        Navigate("/"); 
+      if (loggedIn) {
+        navigate("/"); 
       }
-    }, [loggedIn, error, Navigate]);
-
+    }, [loggedIn, navigate]);
     
   
       useEffect(() => {
@@ -48,14 +52,13 @@
       }
 
     return (
-    
-      <BrowserRouter>
         <div className="bg-gray-800 text-white p-1 h-screen">
           <Routes>
             <Route
               path="/"
               element={
-                localStorage.getItem("token") && localStorage.getItem("user") ? (
+                // localStorage.getItem("token") && localStorage.getItem("user") ? ( 
+                loggedIn ? (
                   <HomePage />
                 ) : (
                   <Navigate to="/login" />
@@ -67,7 +70,6 @@
             <Route path="/loader" element={<Loader />} />
           </Routes>
         </div>
-      </BrowserRouter>
     );
   }
 

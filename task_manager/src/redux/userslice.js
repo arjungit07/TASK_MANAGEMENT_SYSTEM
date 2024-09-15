@@ -85,7 +85,7 @@ export const registerUser = (user) => async (dispatch) => {
     const response = await axios.post("/api/users/signup", user);
     dispatch(registerUserSuccess(response.data));
   } catch (error) {
-    dispatch(registerUserFailure(error.message));
+    throw new Error(error.response?.data?.error || error.message);
   }
 };
   

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser, resetRegisterSucess } from "../redux/userslice";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
+import swal from "sweetalert"
 
 const SignUpForm = () => {
   const [name, setName] = useState("");
@@ -17,33 +18,53 @@ const SignUpForm = () => {
 
   useEffect(() => {
     if (registerSuccess) {
-      swal("Success", "User Registered Successfully", "success").then(() => {
+     Swal.fire({
+               icon: "success",
+               title: "Registration Successful",
+               text: "You have been registered successfully.",
+             });  
         // Reset the register success state
         dispatch(resetRegisterSucess());
         // Navigate to login page
         navigate("/login");
-      });
+      
     }
   }, [registerSuccess, navigate]);
 
 
-   const registerHandler = () => {
-     // Regular expression to validate email format
-     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const registerHandler = async() => {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-     if (!email.match(emailPattern)) {
-       alert("Please enter a valid email address");
-       return;
-     }
+        if (!email.match(emailPattern)) {
+          Swal.fire({
+            icon: "error",
+            title: "Invalid Email",
+            text: "Please enter a valid email address.",
+          });
+          return;
+        }
 
-     if (password !== confirmPass) {
-       alert("Passwords do not match");
-       return;
-     }
+        if (password !== confirmPass) {
+          Swal.fire({
+            icon: "error",
+            title: "Passwords Mismatch",
+            text: "Passwords do not match.",
+          });
+          return;
+        }
 
-     const user = { name, password, email, confirmPass };
-     dispatch(registerUser(user));
-   };
+        const user = { name, password, email, confirmPass };
+          try {
+            await dispatch(registerUser(user));
+    
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Registration Failed",
+        text: `Registration failed: ${error.message}`,
+      });
+  }
+      };
     
 
   return (
@@ -58,6 +79,7 @@ const SignUpForm = () => {
               Name
             </label>
             <input
+              required
               type="text"
               placeholder="Enter your name"
               value={name}
@@ -100,6 +122,7 @@ const SignUpForm = () => {
             </label>
             <input
               type="password"
+              required
               placeholder="Confirm your password"
               value={confirmPass}
               onChange={(e) => setConfirmPass(e.target.value)}

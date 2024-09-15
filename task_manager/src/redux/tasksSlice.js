@@ -8,7 +8,6 @@ const tasksSlice = createSlice({
     tasks: [],
     loading: false,
     error: null,
-    reload: false,
   },
   reducers: {
     showLoading(state, action) {
@@ -57,9 +56,6 @@ const tasksSlice = createSlice({
     updateTaskFailure(state, action) {
       state.loading = false;
       state.error = action.payload;
-    },
-    ReloadData(state, action) {
-      state.reload = action.payload;
     },
   },
 });
