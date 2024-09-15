@@ -100,7 +100,11 @@ export const loginUser = (credentials) => async (dispatch) => {
     localStorage.setItem("token", token); 
     localStorage.setItem("user",user);
   } catch (error) {
-    dispatch(loginUserFailure(error.message));
+      const errorMessage =
+        error.response && error.response.data
+          ? error.response.data.error
+          : error.message;
+    dispatch(loginUserFailure(errorMessage));
   }
 };
 

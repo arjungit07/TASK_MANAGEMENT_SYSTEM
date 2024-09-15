@@ -41,6 +41,7 @@ import { loginUser, resetLoginState } from "../redux/userslice";
              text: error,
              icon: "error",
            });
+           console.log(error)
            setIsLoggingIn(false);
          }
        }, [loggedIn, error, navigate, isLoggingIn]);
