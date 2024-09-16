@@ -75,7 +75,7 @@ const Cards = ({
       //     },
       //   }
       // );
-      dispatch(updateTask(task))
+      const response = dispatch(updateTask(task))
       if (response.status === 200) {
        window.location.reload()
       }

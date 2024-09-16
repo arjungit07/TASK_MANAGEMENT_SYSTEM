@@ -148,6 +148,7 @@ export const updateTask = (taskData) => async (dispatch) => {
       }
     );
     dispatch(updateTaskSuccess(response.data));
+    return response;
   } catch (error) {
     dispatch(updateTaskFailure(error.response?.data?.message || error.message));
   }
