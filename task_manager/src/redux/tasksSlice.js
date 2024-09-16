@@ -89,7 +89,8 @@ export const {
 //     dispatch(fetchTasksFailure(error.response?.data?.message || error.message));
 //   }
 // };
-const backend_url = process.env.BACKEND_URL
+const backend_url = process.env.BACKEND_URL;
+
 
 export const createTask = (taskData) => async (dispatch) => {
   console.log(taskData)
@@ -100,7 +101,7 @@ export const createTask = (taskData) => async (dispatch) => {
   dispatch(createTaskRequest());
   try {
     const response = await axios.post(
-      `https://task-management-system-bs2gjfhrn-harshs-projects-b52001fd.vercel.app/api/tasks/create_task`,
+      `/api/tasks/create_task`,
       { title, description, userId, priority, status },
       {
         headers: {
@@ -118,7 +119,7 @@ export const createTask = (taskData) => async (dispatch) => {
 export const fetchTasks = (token) => async (dispatch) => {
   dispatch(fetchTasksRequest());
   try {
-    const response = await axios.get(`https://task-management-system-bs2gjfhrn-harshs-projects-b52001fd.vercel.app/api/tasks/get_user_tasks`, {
+    const response = await axios.get(`${backend_url}/api/tasks/get_user_tasks`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
