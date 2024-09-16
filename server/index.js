@@ -28,7 +28,10 @@ app.use(
 );
 
 app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin",process.env.FRONTEND_URL);
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://task-management-system-eldz-d2a833xta-harshs-projects-b52001fd.vercel.app"
+  );
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
