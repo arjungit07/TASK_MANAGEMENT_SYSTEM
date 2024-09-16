@@ -27,7 +27,7 @@ const Cards = ({
   //   },
   // ];
   const dispatch = useDispatch();
-  const backendUrl = process.env.BACKEND_URL;
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
   const deleteHandler = async (task_id) => {
     try {

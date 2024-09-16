@@ -80,7 +80,7 @@ export const {
 } = userSlice.actions;
 
 
-const backend_url = process.env.BACKEND_URL;
+const backend_url = process.env.REACT_APP_BACKEND_URL;
 
 console.log("Backend URL:", backend_url); // This should print the correct UR
 
@@ -100,7 +100,7 @@ export const loginUser = (credentials) => async (dispatch) => {
   try {
     console.log("Backend URL:", backend_url);
     const response = await axios.post(
-      `${backend_url}/api/users/login`,
+      `/api/users/login`,
       credentials
     );
     const { token, user } = response.data;
