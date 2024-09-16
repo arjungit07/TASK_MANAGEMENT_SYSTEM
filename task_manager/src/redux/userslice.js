@@ -100,7 +100,7 @@ export const loginUser = (credentials) => async (dispatch) => {
   try {
     console.log("Backend URL:", backend_url);
     const response = await axios.post(
-      `/api/users/login`,
+      `${backend_url}/api/users/login`,
       credentials
     );
     const { token, user } = response.data;
