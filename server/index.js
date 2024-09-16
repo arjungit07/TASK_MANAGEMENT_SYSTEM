@@ -21,12 +21,32 @@ pool.connect((err, client,release) => {
 
 app.use(
   cors({
-    origin:
-     process.env.FRONTEND_URL,
-    methods: ["GET", "POST", "OPTIONS","PATCH","PUT","DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    origin: [
+      "https://https://task-management-system-fx2glgt2m-harshs-projects-b52001fd.vercel.app-pizza-delivery-app.vercel.app",
+      "http://localhost:3000",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true,
   })
 );
+
+app.use(function (req, res, next) {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://online-pizza-https://task-management-system-fx2glgt2m-harshs-projects-b52001fd.vercel.app-app.vercel.app"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  next();
+});
+
 
 
 
