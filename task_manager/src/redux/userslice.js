@@ -82,6 +82,8 @@ export const {
 
 const backend_url = process.env.BACKEND_URL;
 
+console.log("Backend URL:", backend_url); // This should print the correct UR
+
 export const registerUser = (user) => async (dispatch) => {
   dispatch(registerUsersRequest());
   try {

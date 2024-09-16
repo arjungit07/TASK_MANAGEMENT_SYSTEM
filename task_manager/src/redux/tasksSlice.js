@@ -100,7 +100,7 @@ export const createTask = (taskData) => async (dispatch) => {
   dispatch(createTaskRequest());
   try {
     const response = await axios.post(
-      `${backend_url}/api/tasks/create_task1`,
+      `${backend_url}/api/tasks/create_task`,
       { title, description, userId, priority, status },
       {
         headers: {
