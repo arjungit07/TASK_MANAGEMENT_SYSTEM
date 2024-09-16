@@ -79,10 +79,13 @@ export const {
   loadUserFromLocalStorage,
 } = userSlice.actions;
 
+
+const backend_url = process.env.BACKEND_URL;
+
 export const registerUser = (user) => async (dispatch) => {
   dispatch(registerUsersRequest());
   try {
-    const response = await axios.post("/api/users/signup", user);
+    const response = await axios.post(`${backend_url}/api/users/signup`, user);
     dispatch(registerUserSuccess(response.data));
   } catch (error) {
     throw new Error(error.response?.data?.error || error.message);
@@ -93,7 +96,7 @@ export const registerUser = (user) => async (dispatch) => {
 export const loginUser = (credentials) => async (dispatch) => {
   dispatch(loginUserRequest());
   try {
-    const response = await axios.post("/api/users/login", credentials);
+    const response = await axios.post(`${backend_url}/api/users/login`, credentials);
      const { token, user } = response.data; 
     dispatch(loginUserSuccess({token , user}));
 

@@ -2,7 +2,7 @@ import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import axios from "axios";
-import { hideLoading, showLoading } from "../../redux/tasksSlice";
+import { hideLoading, showLoading, updateTask } from "../../redux/tasksSlice";
 import { useDispatch } from "react-redux";
 
 import { FaStar } from "react-icons/fa";
@@ -27,13 +27,14 @@ const Cards = ({
   //   },
   // ];
   const dispatch = useDispatch();
+  const backendUrl = process.env.BACKEND_URL;
 
   const deleteHandler = async (task_id) => {
     try {
       dispatch(showLoading());
       console.log(task_id);
       const deleteTask = await axios.delete(
-        `/api/tasks/delete_task/${task_id}`
+        `${backendUrl}/api/tasks/delete_task/${task_id}`
       );
       if (deleteTask.status === 200) {
         window.location.reload();
@@ -64,16 +65,17 @@ const Cards = ({
 
     try {
       dispatch(showLoading());
-      const response = await axios.patch(
-        `/api/tasks/update_task/${task.id}`,
-        updates,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      // const response = await axios.patch(
+      //   `${backendUrl}/api/tasks/update_task/${task.id}`,
+      //   updates,
+      //   {
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   }
+      // );
+      dispatch(updateTask(task))
       if (response.status === 200) {
        window.location.reload()
       }

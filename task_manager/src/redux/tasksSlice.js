@@ -89,7 +89,7 @@ export const {
 //     dispatch(fetchTasksFailure(error.response?.data?.message || error.message));
 //   }
 // };
-
+const backend_url = process.env.BACKEND_URL
 
 export const createTask = (taskData) => async (dispatch) => {
   console.log(taskData)
@@ -100,7 +100,7 @@ export const createTask = (taskData) => async (dispatch) => {
   dispatch(createTaskRequest());
   try {
     const response = await axios.post(
-      "/api/tasks/create_task",
+      `${backend_url}/api/tasks/create_task1`,
       { title, description, userId, priority, status },
       {
         headers: {
@@ -118,7 +118,7 @@ export const createTask = (taskData) => async (dispatch) => {
 export const fetchTasks = (token) => async (dispatch) => {
   dispatch(fetchTasksRequest());
   try {
-    const response = await axios.get("/api/tasks/get_user_tasks", {
+    const response = await axios.get(`${backend_url}/api/tasks/get_user_tasks`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -138,7 +138,7 @@ export const updateTask = (taskData) => async (dispatch) => {
   dispatch(updateTaskRequest());
   try {
     const response = await axios.patch(
-      `/api/tasks/update_task/${id}`,
+      `${backend_url}/api/tasks/update_task/${id}`,
       { title, description, priority, status },
       {
         headers: {
