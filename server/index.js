@@ -21,28 +21,14 @@ pool.connect((err, client,release) => {
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin:
+     process.env.FRONTEND_URL,
+    methods: ["GET", "POST", "OPTIONS","PATCH","PUT","DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-app.use(function (req, res, next) {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://task-management-system-eldz-d2a833xta-harshs-projects-b52001fd.vercel.app"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
-  );
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  next();
-});
+
 
 app.use("/api/tasks", task_route)
 app.use("/api/users",user_route)
