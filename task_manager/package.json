@@ -1,6 +1,6 @@
 {
   "name": "task_manager",
-  "proxy": "https://task-management-system-8dumh3ap8-harshs-projects-b52001fd.vercel.app",
+  "proxy": "https://task-management-system-rivk-9llnlixau-harshs-projects-b52001fd.vercel.app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
