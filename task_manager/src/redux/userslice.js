@@ -98,10 +98,9 @@ export const registerUser = (user) => async (dispatch) => {
 export const loginUser = (credentials) => async (dispatch) => {
   dispatch(loginUserRequest());
   try {
-    console.log("Backend URL:", backend_url); // This should print the correct UR
-
+    console.log("Backend URL:", backend_url);
     const response = await axios.post(
-      `/api/users/login`,
+      `${backend_url}/api/users/login`,
       credentials
     );
     const { token, user } = response.data;
