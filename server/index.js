@@ -19,34 +19,34 @@ pool.connect((err, client,release) => {
   }
 });
 
-app.use(
-  cors({
-    origin: [
-      process.env.FRONTEND_URL,
-      "http://localhost:3000",
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: [
+//       process.env.FRONTEND_URL,
+//       "http://localhost:3000",
+//     ],
+//     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+//     credentials: true,
+//   })
+// );
 
-app.use(function (req, res, next) {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-   process.env.FRONTEND_URL,
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
-  );
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  next();
-});
-
+// app.use(function (req, res, next) {
+//   res.setHeader(
+//     "Access-Control-Allow-Origin",
+//    process.env.FRONTEND_URL,
+//   );
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+//   );
+//   res.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "X-Requested-With,content-type"
+//   );
+//   res.setHeader("Access-Control-Allow-Credentials", true);
+//   next();
+// });
+app.use(cors()
 
 
 
